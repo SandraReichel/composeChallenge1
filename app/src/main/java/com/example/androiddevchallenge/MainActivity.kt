@@ -16,6 +16,7 @@
 package com.example.androiddevchallenge
 
 import android.os.Bundle
+import android.view.Gravity
 import androidx.activity.compose.setContent
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.ExperimentalFoundationApi
@@ -41,7 +42,6 @@ import com.example.androiddevchallenge.data.Cat
 import com.example.androiddevchallenge.data.Feature
 import com.example.androiddevchallenge.ui.theme.MyTheme
 import com.example.androiddevchallenge.ui.theme.purple200
-import com.google.android.material.chip.Chip
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -62,7 +62,13 @@ fun MyApp() {
             CatList(
                 arrayListOf(
                     Cat(1, "Karli", 17, arrayListOf(Feature.Fluffy, Feature.Cute)),
-                    Cat(1, "Moni", 5, arrayListOf(Feature.Playful, Feature.Cute))
+                    Cat(1, "Moni", 5, arrayListOf(Feature.Playful, Feature.Cute)),
+                    Cat(1, "Mutschmann", 17, arrayListOf(Feature.Fluffy, Feature.Cute, Feature.Quiet, Feature.Aggressive)),
+                    Cat(1, "Lucky", 5, arrayListOf(Feature.Playful, Feature.Cute)),
+                    Cat(1, "Kuh", 17, arrayListOf()),
+                    Cat(1, "Purzel", 5, arrayListOf(Feature.Playful, Feature.Cute, Feature.Outside)),
+                    Cat(1, "Biene", 17, arrayListOf(Feature.Fluffy, Feature.Quiet)),
+                    Cat(1, "Susi", 5, arrayListOf(Feature.Cute, Feature.Quiet, Feature.Aggressive))
                 )
             )
         }
@@ -116,7 +122,7 @@ fun CatItem(cat: Cat, onClick: () -> Unit) {
 
 @Composable
 fun FeatureItem(features: List<Feature>) {
-    Column {
+    Column() {
         features.forEach { feature ->
             FeatureChip(feature = feature)
         }

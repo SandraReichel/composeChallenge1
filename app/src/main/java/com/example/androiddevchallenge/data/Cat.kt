@@ -15,4 +15,5 @@ sealed class Feature(color: Color) {
     object Quiet : Feature(purple200)
     object Agressive : Feature(purple200)
     object Cute : Feature(purple200)
+    object Fluffy : Feature(purple200)
 }

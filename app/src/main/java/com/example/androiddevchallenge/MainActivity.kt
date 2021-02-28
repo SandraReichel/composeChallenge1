@@ -20,16 +20,22 @@ import android.text.Layout
 import androidx.activity.compose.setContent
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.Card
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment.Companion.CenterVertically
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import com.example.androiddevchallenge.data.Cat
+import com.example.androiddevchallenge.data.Feature
 import com.example.androiddevchallenge.ui.theme.MyTheme
 
 class MainActivity : AppCompatActivity() {
@@ -47,34 +53,50 @@ class MainActivity : AppCompatActivity() {
 @Composable
 fun MyApp() {
     Surface(color = MaterialTheme.colors.background) {
-        Text(text = "Ready... Set... GO!")
-        CatList(arrayListOf(
-            Cat(1, "Karli", )
-        ))
+        Column {
+
+
+            Text(text = "Ready... Set... GO!")
+            CatList(
+                arrayListOf(
+                    Cat(1, "Karli", 17, arrayListOf(Feature.Fluffy, Feature.Cute)),
+                    Cat(1, "Moni", 5, arrayListOf(Feature.Playful, Feature.Cute))
+
+                )
+            )
+
+        }
     }
 }
 
 @Composable
 fun CatList(cats: List<Cat>) {
-        Column {
-            cats.forEach { message ->
-                CatItem(message)
-            }
+    Column {
+        cats.forEach { message ->
+            CatItem(message)
         }
     }
 }
 
+
 @Composable
 fun CatItem(cat: Cat) {
+    Card(elevation = 4.dp) {
     Row(verticalAlignment = CenterVertically) {
         Image(
             painter = painterResource(R.drawable.karli),
-            contentDescription = "cute cat"
+            contentDescription = "cute cat",
+            modifier = Modifier
+                .height(50.dp)
+                .width(50.dp)
+                .clip(shape = RoundedCornerShape(4.dp)),
+            contentScale = ContentScale.Crop
         )
         Column {
             Text(cat.name)
             Text(cat.age.toString())
         }
+    }
     }
 }
 

@@ -33,12 +33,15 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.example.androiddevchallenge.data.Cat
 import com.example.androiddevchallenge.data.Feature
 import com.example.androiddevchallenge.ui.theme.MyTheme
 import com.example.androiddevchallenge.ui.theme.purple200
+import com.google.android.material.chip.Chip
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -103,11 +106,47 @@ fun CatItem(cat: Cat, onClick: () -> Unit) {
                 contentScale = ContentScale.Crop
             )
             Column {
-                Text(cat.name)
+                Headline(cat.name)
                 Text(cat.age.toString())
             }
+            FeatureItem(features = cat.features)
         }
     }
+}
+
+@Composable
+fun FeatureItem(features: List<Feature>) {
+    Column {
+        features.forEach { feature ->
+            FeatureChip(feature = feature)
+        }
+    }
+}
+
+@Composable
+fun FeatureChip(feature: Feature) {
+    Card(
+        elevation = 4.dp, backgroundColor = feature.color, shape = RoundedCornerShape(10.dp),
+        modifier = Modifier
+            .padding(4.dp)
+
+    ) {
+        Row(verticalAlignment = Alignment.CenterVertically) {
+            Image(painter = painterResource(feature.icon),
+                contentDescription = "cute cat",
+                modifier = Modifier
+                    .padding(4.dp)
+            )
+            Text(text = feature.name)
+
+
+    }
+}
+}
+
+@Composable
+fun Headline(text: String) {
+    Text(text = text, fontSize = 16.sp, fontStyle = FontStyle.Italic)
 }
 
 @Preview("Light Theme", widthDp = 360, heightDp = 640)

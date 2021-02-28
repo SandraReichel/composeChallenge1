@@ -16,13 +16,20 @@
 package com.example.androiddevchallenge
 
 import android.os.Bundle
+import android.text.Layout
 import androidx.activity.compose.setContent
 import androidx.appcompat.app.AppCompatActivity
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment.Companion.CenterVertically
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
+import com.example.androiddevchallenge.data.Cat
 import com.example.androiddevchallenge.ui.theme.MyTheme
 
 class MainActivity : AppCompatActivity() {
@@ -41,6 +48,33 @@ class MainActivity : AppCompatActivity() {
 fun MyApp() {
     Surface(color = MaterialTheme.colors.background) {
         Text(text = "Ready... Set... GO!")
+        CatList(arrayListOf(
+            Cat(1, "Karli", )
+        ))
+    }
+}
+
+@Composable
+fun CatList(cats: List<Cat>) {
+        Column {
+            cats.forEach { message ->
+                CatItem(message)
+            }
+        }
+    }
+}
+
+@Composable
+fun CatItem(cat: Cat) {
+    Row(verticalAlignment = CenterVertically) {
+        Image(
+            painter = painterResource(R.drawable.karli),
+            contentDescription = "cute cat"
+        )
+        Column {
+            Text(cat.name)
+            Text(cat.age.toString())
+        }
     }
 }
 

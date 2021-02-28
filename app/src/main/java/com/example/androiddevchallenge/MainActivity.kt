@@ -34,7 +34,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontStyle
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -100,33 +102,46 @@ fun CatItem(cat: Cat, onClick: () -> Unit) {
             .padding(16.dp)
             .fillMaxWidth()
     ) {
-        Row(verticalAlignment = Alignment.CenterVertically) {
-            Image(
-                painter = painterResource(R.drawable.karli),
-                contentDescription = "cute cat",
-                modifier = Modifier
-                    .height(50.dp)
-                    .width(50.dp)
-                    .padding(8.dp)
-                    .clip(shape = RoundedCornerShape(10.dp)),
-                contentScale = ContentScale.Crop
-            )
-            Column {
-                Headline(cat.name)
-                Text(cat.age.toString())
+
+        Column(modifier = Modifier
+            .padding(16.dp)
+            .fillMaxWidth()) {
+            NameTag(cat = cat)
+
+            Row(verticalAlignment = Alignment.CenterVertically) {
+                Image(
+                    painter = painterResource(R.drawable.karli),
+                    contentDescription = "cute cat",
+                    modifier = Modifier
+                        .height(80.dp)
+                        .width(80.dp)
+                        .padding(8.dp)
+                        .clip(shape = RoundedCornerShape(10.dp)),
+                    contentScale = ContentScale.Crop
+                )
+
+                FeatureItem(features = cat.features)
             }
-            FeatureItem(features = cat.features)
         }
     }
 }
 
 @Composable
 fun FeatureItem(features: List<Feature>) {
-    Column() {
+    Column(){
         features.forEach { feature ->
             FeatureChip(feature = feature)
         }
     }
+}
+
+@Composable
+fun NameTag(cat: Cat) {
+    Row(verticalAlignment = Alignment.CenterVertically) {
+        Headline(cat.name)
+        Text(" " + cat.age.toString() + " years old")
+    }
+
 }
 
 @Composable
@@ -152,7 +167,7 @@ fun FeatureChip(feature: Feature) {
 
 @Composable
 fun Headline(text: String) {
-    Text(text = text, fontSize = 16.sp, fontStyle = FontStyle.Italic)
+    Text(text = text, fontSize = 20.sp, style = TextStyle(fontWeight = FontWeight.Bold))
 }
 
 @Preview("Light Theme", widthDp = 360, heightDp = 640)

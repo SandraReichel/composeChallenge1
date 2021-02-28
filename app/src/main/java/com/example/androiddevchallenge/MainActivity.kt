@@ -16,14 +16,12 @@
 package com.example.androiddevchallenge
 
 import android.os.Bundle
-import android.text.Layout
 import androidx.activity.compose.setContent
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
 import androidx.compose.material.MaterialTheme
@@ -31,7 +29,6 @@ import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
-import androidx.compose.ui.Alignment.Companion.CenterVertically
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
@@ -54,22 +51,17 @@ class MainActivity : AppCompatActivity() {
     }
 }
 
-// Start building your app here!
 @Composable
 fun MyApp() {
     Surface(color = MaterialTheme.colors.background) {
         Column {
-
-
             Text(text = "Ready... Set... GO!")
             CatList(
                 arrayListOf(
                     Cat(1, "Karli", 17, arrayListOf(Feature.Fluffy, Feature.Cute)),
                     Cat(1, "Moni", 5, arrayListOf(Feature.Playful, Feature.Cute))
-
                 )
             )
-
         }
     }
 }
@@ -79,52 +71,40 @@ fun Header() {
     Text(text = "Ready... Set... GO!")
 }
 
-@OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun CatList(cats: List<Cat>) {
-
     Column {
         Header()
-
-
         cats.forEach { message ->
             CatItem(message, {})
         }
     }
-
 }
 
 
 @Composable
 fun CatItem(cat: Cat, onClick: () -> Unit) {
-    Box(
+    Card(
+        elevation = 8.dp, backgroundColor = purple200, shape = RoundedCornerShape(10.dp),
         modifier = Modifier
             .clickable(onClick = onClick)
-            .padding(32.dp)
+            .padding(16.dp)
             .fillMaxWidth()
     ) {
-        Card(
-            elevation = 4.dp, backgroundColor = purple200, modifier = Modifier
-                .clickable(onClick = onClick)
-                .padding(32.dp)
-                .fillMaxWidth()
-        ) {
-            Row(verticalAlignment = Alignment.CenterVertically) {
-
-
-                Image(
-                    painter = painterResource(R.drawable.karli),
-                    contentDescription = "cute cat",
-                    modifier = Modifier
-                        .height(50.dp)
-                        .width(50.dp)
-                        .clip(shape = RoundedCornerShape(4.dp)),
-                    contentScale = ContentScale.Crop
-                )
-                Column {
-                    Text(cat.name)
-                    Text(cat.age.toString())
-                }
+        Row(verticalAlignment = Alignment.CenterVertically) {
+            Image(
+                painter = painterResource(R.drawable.karli),
+                contentDescription = "cute cat",
+                modifier = Modifier
+                    .height(50.dp)
+                    .width(50.dp)
+                    .padding(8.dp)
+                    .clip(shape = RoundedCornerShape(10.dp)),
+                contentScale = ContentScale.Crop
+            )
+            Column {
+                Text(cat.name)
+                Text(cat.age.toString())
             }
         }
     }

@@ -53,7 +53,7 @@ fun CatDetail(cat: Cat) {
                 .fillMaxWidth()
         ) {
             TopAppBar(title = { Text(text = " Meet " + cat.name) })
-            Box() {
+            Box(contentAlignment = Alignment.BottomEnd) {
                 Image(
                     painter = painterResource(R.drawable.karli),
                     contentDescription = "cute cat",
@@ -87,7 +87,7 @@ fun CatFacts(cat: Cat) {
 @Composable
 fun CatLightPreview() {
     MyTheme {
-        CatDetail(DataProvider.getCat(1))
+        CatDetail(DataProvider.getCat(3))
     }
 }
 
@@ -95,6 +95,6 @@ fun CatLightPreview() {
 @Composable
 fun CatDarkPreview() {
     MyTheme(darkTheme = true) {
-        CatDetail(DataProvider.getCat(0))
+        CatDetail(DataProvider.getCat(3))
     }
 }

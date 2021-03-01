@@ -1,5 +1,7 @@
 package com.example.androiddevchallenge.ui.views
 
+import androidx.compose.foundation.border
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -15,18 +17,22 @@ import com.example.androiddevchallenge.data.Feature
 
 @Composable
 fun FeatureChip(feature: Feature) {
-    Card(
-        elevation = 2.dp, backgroundColor = feature.color,
-        shape = RoundedCornerShape(10.dp),
-        modifier = Modifier.padding(2.dp)
+    Box(modifier = Modifier.padding(4.dp)) {
 
-    ) {
-        Row(verticalAlignment = Alignment.CenterVertically) {
-            Icon(feature.icon, contentDescription = null, modifier = Modifier.padding(4.dp))
-            Text(text = feature.name,
-                fontSize = 12.sp,
-                modifier = Modifier.padding(end = 4.dp),
-            )
+        Card(
+            elevation = 2.dp, backgroundColor = feature.color,
+            shape = RoundedCornerShape(10.dp),
+            modifier = Modifier.padding(2.dp)
+
+        ) {
+            Row(verticalAlignment = Alignment.CenterVertically) {
+                Icon(feature.icon, contentDescription = null, modifier = Modifier.padding(4.dp))
+                Text(
+                    text = feature.name,
+                    fontSize = 12.sp,
+                    modifier = Modifier.padding(end = 4.dp)
+                )
+            }
         }
     }
 }

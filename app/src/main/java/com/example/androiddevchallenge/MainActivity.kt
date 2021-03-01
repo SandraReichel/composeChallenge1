@@ -15,6 +15,7 @@
  */
 package com.example.androiddevchallenge
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.compose.setContent
 import androidx.appcompat.app.AppCompatActivity
@@ -36,8 +37,10 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.androiddevchallenge.CatDetailActivity.Companion.ARGUMENT_CAT_ID
 import com.example.androiddevchallenge.data.Cat
 import com.example.androiddevchallenge.data.DataProvider
+import com.example.androiddevchallenge.data.Fact
 import com.example.androiddevchallenge.data.Feature
 import com.example.androiddevchallenge.ui.theme.MyTheme
 
@@ -46,14 +49,21 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             MyTheme {
-                MyApp()
+                MyApp { catId -> openCatProfile(catId) }
             }
         }
+    }
+
+    fun openCatProfile(catId: Int) {
+        val intent = Intent(this, CatDetailActivity::class.java).apply {
+            putExtra(ARGUMENT_CAT_ID , catId)
+        }
+        startActivity(intent)
     }
 }
 
 @Composable
-fun MyApp() {
+fun MyApp(onCatClicked: (Int) -> Unit) {
     Surface(color = MaterialTheme.colors.background) {
         Column(
             horizontalAlignment = Alignment.End,
@@ -61,7 +71,9 @@ fun MyApp() {
                 .fillMaxWidth()
         ) {
             TopAppBar(title = { Text(text = "Adopt a cute Animal") })
-            CatList(DataProvider.getCatList())
+            CatList(DataProvider.getCatList()) {
+                onCatClicked(it)
+            }
         }
     }
 }
@@ -78,11 +90,13 @@ fun Header() {
 }
 
 @Composable
-fun CatList(cats: List<Cat>) {
+fun CatList(cats: List<Cat>, onCatClicked: (Int) -> Unit) {
     LazyColumn {
         item { Header() }
-        items(cats) { message ->
-            CatItem(message, {})
+        items(cats) { cat ->
+            CatItem(cat) {
+                onCatClicked(cat.id)
+            }
         }
     }
 }
@@ -116,6 +130,7 @@ fun CatItem(cat: Cat, onClick: () -> Unit) {
                             .clip(shape = RoundedCornerShape(10.dp)),
                         contentScale = ContentScale.Crop
                     )
+                    //FactsColumn(facts = cat.facts)
                     FeatureItem(features = cat.features)
                 }
             }
@@ -142,14 +157,7 @@ fun FeatureItem(features: List<Feature>) {
     }
 }
 
-@Composable
-fun FactsColumn(cat: Cat) {
-    Row(verticalAlignment = Alignment.CenterVertically) {
-        cat.gender.icon?.let { Icon(it, contentDescription = cat.gender.name) }
-        Text(" " + cat.age.toString() + " years old")
 
-    }
-}
 
 
 @Composable
@@ -188,7 +196,7 @@ fun Headline(text: String) {
 @Composable
 fun LightPreview() {
     MyTheme {
-        MyApp()
+        MyApp({})
     }
 }
 
@@ -196,6 +204,6 @@ fun LightPreview() {
 @Composable
 fun DarkPreview() {
     MyTheme(darkTheme = true) {
-        MyApp()
+        MyApp({})
     }
 }

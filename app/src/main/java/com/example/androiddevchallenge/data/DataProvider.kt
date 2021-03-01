@@ -43,4 +43,7 @@ object DataProvider {
             arrayListOf(Feature.Cute, Feature.Quiet, Feature.Aggressive)
         )
     )
+
+    fun getCat(id: Int) = getCatList().first { it.id == id }
+
 }

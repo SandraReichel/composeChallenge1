@@ -1,5 +1,6 @@
 package com.example.androiddevchallenge.ui.views
 
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.material.Icon
 import androidx.compose.material.Text
@@ -9,10 +10,12 @@ import com.example.androiddevchallenge.data.Fact
 
 @Composable
 fun FactsColumn(facts: List<Fact>) {
-    Row(verticalAlignment = Alignment.CenterVertically) {
+    Column() {
         facts.forEach { fact ->
-            Icon(fact.icon, contentDescription = null)
-            Text(fact.value)
+            Row {
+                Icon(fact.icon, contentDescription = null)
+                Text(fact.value)
+            }
         }
 
     }

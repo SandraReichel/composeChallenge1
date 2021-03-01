@@ -43,13 +43,17 @@ import com.example.androiddevchallenge.data.DataProvider
 import com.example.androiddevchallenge.data.Fact
 import com.example.androiddevchallenge.data.Feature
 import com.example.androiddevchallenge.ui.theme.MyTheme
+import com.example.androiddevchallenge.ui.views.FeatureChip
+import com.example.androiddevchallenge.ui.views.NameTag
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
             MyTheme {
-                MyApp { catId -> openCatProfile(catId) }
+                MyApp {
+                        catId -> openCatProfile(catId)
+                }
             }
         }
     }
@@ -72,7 +76,7 @@ fun MyApp(onCatClicked: (Int) -> Unit) {
         ) {
             TopAppBar(title = { Text(text = "Adopt a cute Animal") })
             CatList(DataProvider.getCatList()) {
-                onCatClicked(it)
+                onCatClicked.invoke(it)
             }
         }
     }
@@ -160,32 +164,9 @@ fun FeatureItem(features: List<Feature>) {
 
 
 
-@Composable
-fun NameTag(cat: Cat) {
-    Row(verticalAlignment = Alignment.CenterVertically) {
-        Headline(cat.name)
-        cat.gender.icon?.let { Icon(it, contentDescription = cat.gender.name) }
-        Text(" " + cat.age.toString() + " years old")
-    }
-}
 
-@Composable
-fun FeatureChip(feature: Feature) {
-    Card(
-        elevation = 2.dp, backgroundColor = feature.color,
-        shape = RoundedCornerShape(10.dp),
-        modifier = Modifier.padding(2.dp)
 
-    ) {
-        Row(verticalAlignment = Alignment.CenterVertically) {
-            Icon(feature.icon, contentDescription = null, modifier = Modifier.padding(4.dp))
-            Text(text = feature.name,
-                fontSize = 12.sp,
-                modifier = Modifier.padding(end = 4.dp),
-            )
-        }
-    }
-}
+
 
 @Composable
 fun Headline(text: String) {

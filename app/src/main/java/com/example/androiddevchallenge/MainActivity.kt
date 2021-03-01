@@ -32,6 +32,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
@@ -41,6 +42,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.androiddevchallenge.data.Cat
+import com.example.androiddevchallenge.data.DataProvider
 import com.example.androiddevchallenge.data.Feature
 import com.example.androiddevchallenge.ui.theme.MyTheme
 import com.example.androiddevchallenge.ui.theme.purple200
@@ -61,21 +63,11 @@ fun MyApp() {
     Surface(color = MaterialTheme.colors.background) {
         Column {
             Text(text = "Ready... Set... GO!")
-            CatList(
-                arrayListOf(
-                    Cat(1, "Karli", 17, arrayListOf(Feature.Fluffy, Feature.Cute)),
-                    Cat(1, "Moni", 5, arrayListOf(Feature.Playful, Feature.Cute)),
-                    Cat(1, "Mutschmann", 17, arrayListOf(Feature.Fluffy, Feature.Cute, Feature.Quiet, Feature.Aggressive)),
-                    Cat(1, "Lucky", 5, arrayListOf(Feature.Playful, Feature.Cute)),
-                    Cat(1, "Kuh", 17, arrayListOf()),
-                    Cat(1, "Purzel", 5, arrayListOf(Feature.Playful, Feature.Cute, Feature.Outside)),
-                    Cat(1, "Biene", 17, arrayListOf(Feature.Fluffy, Feature.Quiet)),
-                    Cat(1, "Susi", 5, arrayListOf(Feature.Cute, Feature.Quiet, Feature.Aggressive))
-                )
-            )
+            CatList( DataProvider.getCatList())
         }
     }
 }
+
 
 @Composable
 fun Header() {
@@ -96,19 +88,21 @@ fun CatList(cats: List<Cat>) {
 @Composable
 fun CatItem(cat: Cat, onClick: () -> Unit) {
     Card(
-        elevation = 8.dp, backgroundColor = purple200, shape = RoundedCornerShape(10.dp),
+        elevation = 8.dp, shape = RoundedCornerShape(10.dp),
         modifier = Modifier
             .clickable(onClick = onClick)
             .padding(16.dp)
             .fillMaxWidth()
     ) {
 
-        Column(modifier = Modifier
-            .padding(16.dp)
-            .fillMaxWidth()) {
+        Column(
+            modifier = Modifier
+                .padding(8.dp)
+                .fillMaxWidth()
+        ) {
             NameTag(cat = cat)
 
-            Row(verticalAlignment = Alignment.CenterVertically) {
+            Row(verticalAlignment = Alignment.Top) {
                 Image(
                     painter = painterResource(R.drawable.karli),
                     contentDescription = "cute cat",
@@ -126,11 +120,21 @@ fun CatItem(cat: Cat, onClick: () -> Unit) {
     }
 }
 
+
 @Composable
 fun FeatureItem(features: List<Feature>) {
-    Column(){
-        features.forEach { feature ->
-            FeatureChip(feature = feature)
+    Column(horizontalAlignment = Alignment.End,
+        modifier = Modifier
+            .padding(16.dp)
+            .fillMaxWidth()
+    ) {
+        val chunkedList = features.chunked(2)
+        chunkedList.forEach {
+            Row() {
+                it.forEach { feature ->
+                    FeatureChip(feature = feature)
+                }
+            }
         }
     }
 }
@@ -153,7 +157,8 @@ fun FeatureChip(feature: Feature) {
 
     ) {
         Row(verticalAlignment = Alignment.CenterVertically) {
-            Image(painter = painterResource(feature.icon),
+            Image(
+                painter = painterResource(feature.icon),
                 contentDescription = "cute cat",
                 modifier = Modifier
                     .padding(4.dp)
@@ -161,8 +166,8 @@ fun FeatureChip(feature: Feature) {
             Text(text = feature.name)
 
 
+        }
     }
-}
 }
 
 @Composable

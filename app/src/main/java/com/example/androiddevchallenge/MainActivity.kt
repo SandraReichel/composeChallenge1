@@ -16,27 +16,22 @@
 package com.example.androiddevchallenge
 
 import android.os.Bundle
-import android.view.Gravity
 import androidx.activity.compose.setContent
 import androidx.appcompat.app.AppCompatActivity
-import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.Card
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Surface
-import androidx.compose.material.Text
+import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -45,7 +40,6 @@ import com.example.androiddevchallenge.data.Cat
 import com.example.androiddevchallenge.data.DataProvider
 import com.example.androiddevchallenge.data.Feature
 import com.example.androiddevchallenge.ui.theme.MyTheme
-import com.example.androiddevchallenge.ui.theme.purple200
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -61,9 +55,13 @@ class MainActivity : AppCompatActivity() {
 @Composable
 fun MyApp() {
     Surface(color = MaterialTheme.colors.background) {
-        Column {
-            Text(text = "Ready... Set... GO!")
-            CatList( DataProvider.getCatList())
+        Column(
+            horizontalAlignment = Alignment.End,
+            modifier = Modifier
+                .fillMaxWidth()
+        ) {
+            TopAppBar(title = { Text(text = "Adopt a cute Animal") })
+            CatList(DataProvider.getCatList())
         }
     }
 }
@@ -71,50 +69,55 @@ fun MyApp() {
 
 @Composable
 fun Header() {
-    Text(text = "Ready... Set... GO!")
+    Text(
+        text = "Adopting an animal can change a life. All these cute animals are ready to find a caring family",
+        fontSize = 20.sp,
+        modifier = Modifier.padding(20.dp),
+        style = TextStyle(fontWeight = FontWeight.SemiBold)
+    )
 }
 
 @Composable
 fun CatList(cats: List<Cat>) {
-    Column {
-        Header()
-        cats.forEach { message ->
+    LazyColumn {
+        item { Header() }
+        items(cats) { message ->
             CatItem(message, {})
         }
     }
 }
 
-
 @Composable
 fun CatItem(cat: Cat, onClick: () -> Unit) {
-    Card(
-        elevation = 8.dp, shape = RoundedCornerShape(10.dp),
-        modifier = Modifier
-            .clickable(onClick = onClick)
-            .padding(16.dp)
-            .fillMaxWidth()
-    ) {
-
-        Column(
+    Row {
+        Card(
+            elevation = 8.dp, shape = RoundedCornerShape(10.dp),
             modifier = Modifier
-                .padding(8.dp)
+                .clickable(onClick = onClick)
+                .padding(start = 16.dp, end = 16.dp, top = 8.dp, bottom = 8.dp)
                 .fillMaxWidth()
         ) {
-            NameTag(cat = cat)
 
-            Row(verticalAlignment = Alignment.Top) {
-                Image(
-                    painter = painterResource(R.drawable.karli),
-                    contentDescription = "cute cat",
-                    modifier = Modifier
-                        .height(80.dp)
-                        .width(80.dp)
-                        .padding(8.dp)
-                        .clip(shape = RoundedCornerShape(10.dp)),
-                    contentScale = ContentScale.Crop
-                )
+            Column(
+                modifier = Modifier
+                    .padding(8.dp)
+                    .fillMaxWidth()
+            ) {
+                NameTag(cat = cat)
 
-                FeatureItem(features = cat.features)
+                Row(verticalAlignment = Alignment.Top) {
+                    Image(
+                        painter = painterResource(R.drawable.karli),
+                        contentDescription = "cute cat",
+                        modifier = Modifier
+                            .height(80.dp)
+                            .width(80.dp)
+                            .padding(8.dp)
+                            .clip(shape = RoundedCornerShape(10.dp)),
+                        contentScale = ContentScale.Crop
+                    )
+                    FeatureItem(features = cat.features)
+                }
             }
         }
     }
@@ -123,9 +126,9 @@ fun CatItem(cat: Cat, onClick: () -> Unit) {
 
 @Composable
 fun FeatureItem(features: List<Feature>) {
-    Column(horizontalAlignment = Alignment.End,
+    Column(
+        horizontalAlignment = Alignment.End,
         modifier = Modifier
-            .padding(16.dp)
             .fillMaxWidth()
     ) {
         val chunkedList = features.chunked(2)
@@ -140,32 +143,38 @@ fun FeatureItem(features: List<Feature>) {
 }
 
 @Composable
+fun FactsColumn(cat: Cat) {
+    Row(verticalAlignment = Alignment.CenterVertically) {
+        cat.gender.icon?.let { Icon(it, contentDescription = cat.gender.name) }
+        Text(" " + cat.age.toString() + " years old")
+
+    }
+}
+
+
+@Composable
 fun NameTag(cat: Cat) {
     Row(verticalAlignment = Alignment.CenterVertically) {
         Headline(cat.name)
+        cat.gender.icon?.let { Icon(it, contentDescription = cat.gender.name) }
         Text(" " + cat.age.toString() + " years old")
     }
-
 }
 
 @Composable
 fun FeatureChip(feature: Feature) {
     Card(
-        elevation = 4.dp, backgroundColor = feature.color, shape = RoundedCornerShape(10.dp),
-        modifier = Modifier
-            .padding(4.dp)
+        elevation = 2.dp, backgroundColor = feature.color,
+        shape = RoundedCornerShape(10.dp),
+        modifier = Modifier.padding(2.dp)
 
     ) {
         Row(verticalAlignment = Alignment.CenterVertically) {
-            Image(
-                painter = painterResource(feature.icon),
-                contentDescription = "cute cat",
-                modifier = Modifier
-                    .padding(4.dp)
+            Icon(feature.icon, contentDescription = null, modifier = Modifier.padding(4.dp))
+            Text(text = feature.name,
+                fontSize = 12.sp,
+                modifier = Modifier.padding(end = 4.dp),
             )
-            Text(text = feature.name)
-
-
         }
     }
 }

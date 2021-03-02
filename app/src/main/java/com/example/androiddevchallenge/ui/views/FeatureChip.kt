@@ -1,9 +1,7 @@
 package com.example.androiddevchallenge.ui.views
 
 import androidx.compose.foundation.border
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
 import androidx.compose.material.Icon
@@ -26,7 +24,7 @@ fun FeatureChip(feature: Feature) {
 
         ) {
             Row(verticalAlignment = Alignment.CenterVertically) {
-                Icon(feature.icon, contentDescription = null, modifier = Modifier.padding(4.dp))
+                Icon(feature.icon, contentDescription = null, modifier = Modifier.padding(4.dp).width(14.dp).height(14.dp))
                 Text(
                     text = feature.name,
                     fontSize = 12.sp,

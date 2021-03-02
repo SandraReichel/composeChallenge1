@@ -6,6 +6,7 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import com.example.androiddevchallenge.Headline
+import com.example.androiddevchallenge.HeadlineHuge
 import com.example.androiddevchallenge.data.Cat
 
 
@@ -13,6 +14,15 @@ import com.example.androiddevchallenge.data.Cat
 fun NameTag(cat: Cat) {
     Row(verticalAlignment = Alignment.CenterVertically) {
         Headline(cat.name)
+        cat.gender.icon?.let { Icon(it, contentDescription = cat.gender.name) }
+        Text(" " + cat.age.toString() + " years old")
+    }
+}
+
+@Composable
+fun NameHugeTag(cat: Cat) {
+    Row(verticalAlignment = Alignment.CenterVertically) {
+        HeadlineHuge(cat.name)
         cat.gender.icon?.let { Icon(it, contentDescription = cat.gender.name) }
         Text(" " + cat.age.toString() + " years old")
     }

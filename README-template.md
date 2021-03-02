@@ -1,18 +1,16 @@
-# Put title of your app here
+# A cat like Karli
 
-<!--- Replace <OWNER> with your Github Username and <REPOSITORY> with the name of your repository. -->
-<!--- You can find both of these in the url bar when you open your repository in github. -->
-![Workflow result](https://github.com/<OWNER>/<REPOSITORY>/workflows/Check/badge.svg)
-
+![Workflow result](https://github.com/SandraReichel/composeChallenge1/workflows/Check/badge.svg)
 
 ## :scroll: Description
-<!--- Describe your app in one or two sentences -->
-
+I created a app to adopt cute cats with all of my favorite cats in my life.
+Everyone needs a cat like my own cat Karli
 
 ## :bulb: Motivation and Context
-<!--- Optionally point readers to interesting parts of your submission. -->
-<!--- What are you especially proud of? -->
+I wanted to take part in the #AndroidDevChallenge to try and learn Compose. But of cause also to
+have fun and exchange with other developers.
 
+I'm really proud i create a nice UI complete in Compose just in a few days.
 
 ## :camera_flash: Screenshots
 <!-- You can add more screenshots here if you like -->

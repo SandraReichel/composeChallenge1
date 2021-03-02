@@ -26,6 +26,8 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Pets
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -51,14 +53,12 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             MyTheme {
-                MyApp {
-                        catId -> openCatProfile(catId)
-                }
+                MyApp { catId -> openCatProfile(catId) }
             }
         }
     }
 
-    fun openCatProfile(catId: Int) {
+    private fun openCatProfile(catId: Int) {
         val intent = Intent(this, CatDetailActivity::class.java).apply {
             putExtra(ARGUMENT_CAT_ID , catId)
         }
@@ -69,12 +69,13 @@ class MainActivity : AppCompatActivity() {
 @Composable
 fun MyApp(onCatClicked: (Int) -> Unit) {
     Surface(color = MaterialTheme.colors.background) {
-        Column(
-            horizontalAlignment = Alignment.End,
-            modifier = Modifier
-                .fillMaxWidth()
+        Column(horizontalAlignment = Alignment.End, modifier = Modifier.fillMaxWidth()
         ) {
-            TopAppBar(title = { Text(text = "Adopt a cute Animal") })
+            TopAppBar(title = {
+                Row{
+                    Text(text = "A Cat like Karli ")
+                    Icon(Icons.Filled.Pets, contentDescription = null)
+                } })
             CatList(DataProvider.getCatList()) {
                 onCatClicked.invoke(it)
             }
@@ -171,6 +172,11 @@ fun FeatureItem(features: List<Feature>) {
 @Composable
 fun Headline(text: String) {
     Text(text = text, fontSize = 20.sp, style = TextStyle(fontWeight = FontWeight.Bold))
+}
+
+@Composable
+fun HeadlineHuge(text: String) {
+    Text(text = text, fontSize = 24.sp, style = TextStyle(fontWeight = FontWeight.Bold))
 }
 
 @Preview("Light Theme", widthDp = 360, heightDp = 640)

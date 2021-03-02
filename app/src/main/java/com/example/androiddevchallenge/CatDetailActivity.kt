@@ -4,12 +4,13 @@ import android.os.Bundle
 import androidx.activity.compose.setContent
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Surface
-import androidx.compose.material.Text
-import androidx.compose.material.TopAppBar
+import androidx.compose.material.*
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Face
+import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -47,6 +48,38 @@ class CatDetailActivity : AppCompatActivity() {
 @Composable
 fun CatDetail(cat: Cat) {
     Surface(color = MaterialTheme.colors.background) {
+
+        Box(modifier = Modifier
+            .padding(16.dp)
+            .fillMaxWidth()
+            .fillMaxHeight()) {
+            Card(
+                elevation = 8.dp, shape = RoundedCornerShape(10.dp),
+                modifier = Modifier
+                    .padding(16.dp)
+                    .fillMaxWidth()
+                    .fillMaxHeight()
+            ) {
+                Column(modifier = Modifier
+                    .padding(16.dp, top = 250.dp)
+                    .fillMaxWidth()
+                    .fillMaxHeight()) {
+                    NameTag(cat = cat)
+                    Spacer(Modifier.padding(8.dp))
+                    CatFacts(cat = cat)
+                    Spacer(Modifier.padding(8.dp))
+                    Text("This is the best cat ever. This eat loves cuddles and is super fun. ")
+                    Spacer(Modifier.padding(8.dp))
+                    Button(onClick = {} ) {
+                        Row(){
+                            Icon(Icons.Filled.Favorite, contentDescription = null)
+                            Text(" Adopt Now")
+                        }
+                    }
+                }
+            }
+        }
+
         Column(
             horizontalAlignment = Alignment.Start,
             modifier = Modifier
@@ -62,23 +95,19 @@ fun CatDetail(cat: Cat) {
                         .fillMaxWidth()
                         .height(200.dp)
                 )
-                Row() {
+                Row {
                     cat.features.forEach { feature ->
                         FeatureChip(feature = feature)
                     }
                 }
             }
-            NameTag(cat = cat)
-            CatFacts(cat = cat)
         }
-
     }
 }
 
 @Composable
 fun CatFacts(cat: Cat) {
     Column {
-        Text(text = "Nummer " + cat.id)
         FactsColumn(facts = cat.facts)
     }
 }

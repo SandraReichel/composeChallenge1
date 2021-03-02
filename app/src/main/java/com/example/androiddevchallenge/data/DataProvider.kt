@@ -31,7 +31,7 @@ object DataProvider {
             arrayListOf(Feature.Playful, Feature.Cute)
         ),
         Cat(
-            3, "Mr Fluffels", R.drawable.cat2,1, Gender.NotKnown,
+            3, "Mr Fluffels", R.drawable.cat2, 1, Gender.NotKnown,
             arrayListOf(Fact.HomeTown("Dresden"), Fact.ArrivalDate("01.01.2020")),
             arrayListOf(Feature.Fluffy, Feature.Cute, Feature.Quiet, Feature.Aggressive)
         ),
@@ -41,21 +41,22 @@ object DataProvider {
             arrayListOf(Feature.Playful, Feature.Cute)
         ),
         Cat(
-            5, "Kuh", R.drawable.cat4,11, Gender.Male,
+            5, "Kuh", R.drawable.cat4, 11, Gender.Male,
             arrayListOf(Fact.HomeTown("Heinrichsfeld"), Fact.ArrivalDate("02.03.2018")),
-            arrayListOf()),
+            arrayListOf()
+        ),
         Cat(
             6, "Purzel", R.drawable.cat5, 3, Gender.Female,
             arrayListOf(Fact.HomeTown("Spremberg"), Fact.ArrivalDate("07.06.2018")),
             arrayListOf(Feature.Playful, Feature.Cute, Feature.Outside)
         ),
         Cat(
-            7, "Biene", R.drawable.cat2,15, Gender.Female,
+            7, "Biene", R.drawable.cat2, 15, Gender.Female,
             arrayListOf(Fact.HomeTown("Spremberg"), Fact.ArrivalDate("01.02.2021")),
             arrayListOf(Feature.Fluffy, Feature.Quiet)
         ),
         Cat(
-            8, "Susi", R.drawable.karli,4, Gender.Male,
+            8, "Susi", R.drawable.karli, 4, Gender.Male,
             arrayListOf(Fact.HomeTown("Spremberg"), Fact.ArrivalDate("28.12.2021")),
             arrayListOf(Feature.Cute, Feature.Quiet, Feature.Aggressive)
         )

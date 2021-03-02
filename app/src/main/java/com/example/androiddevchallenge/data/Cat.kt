@@ -1,5 +1,6 @@
 package com.example.androiddevchallenge.data
 
+import androidx.annotation.DrawableRes
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.*
 import androidx.compose.ui.graphics.Color
@@ -8,6 +9,7 @@ import androidx.compose.ui.graphics.vector.ImageVector
 data class Cat(
     val id: Int,
     val name: String,
+    @DrawableRes val image: Int,
     val age: Int,
     val gender: Gender,
     val facts: List<Fact>,

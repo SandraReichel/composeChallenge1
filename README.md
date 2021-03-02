@@ -7,6 +7,8 @@ I created a app to adopt cute cats with all of my favorite cats in my life.
 Everyone needs a cat like my own cat Karli
 
 ## :bulb: Motivation and Context
+I started developing Android in University on Android 2.3, Since then so much development happend for me personally and also
+in Android. i want to be part of the next huge step.
 I wanted to take part in the #AndroidDevChallenge to try and learn Compose. But of cause also to
 have fun and exchange with other developers. I would like to learn more about the performance of Compose,
 because my UI seems a bit slow

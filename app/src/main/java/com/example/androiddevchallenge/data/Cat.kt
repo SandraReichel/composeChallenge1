@@ -2,7 +2,16 @@ package com.example.androiddevchallenge.data
 
 import androidx.annotation.DrawableRes
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.*
+import androidx.compose.material.icons.filled.CalendarToday
+import androidx.compose.material.icons.filled.EmojiNature
+import androidx.compose.material.icons.filled.Face
+import androidx.compose.material.icons.filled.Female
+import androidx.compose.material.icons.filled.LocationCity
+import androidx.compose.material.icons.filled.Male
+import androidx.compose.material.icons.filled.SelfImprovement
+import androidx.compose.material.icons.filled.SportsKabaddi
+import androidx.compose.material.icons.filled.TagFaces
+import androidx.compose.material.icons.filled.VideogameAsset
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 

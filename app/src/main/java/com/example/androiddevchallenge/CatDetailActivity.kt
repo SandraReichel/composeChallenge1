@@ -89,7 +89,7 @@ fun CatDetail(cat: Cat) {
             TopAppBar(title = { Text(text = " Meet " + cat.name) })
             Box(contentAlignment = Alignment.BottomEnd) {
                 Image(
-                    painter = painterResource(R.drawable.karli),
+                    painter = painterResource(cat.image),
                     contentDescription = "cute cat",
                     contentScale = ContentScale.FillWidth,
                     modifier = Modifier

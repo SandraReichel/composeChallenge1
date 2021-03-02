@@ -128,7 +128,7 @@ fun CatItem(cat: Cat, onClick: () -> Unit) {
 
                 Row(verticalAlignment = Alignment.Top) {
                     Image(
-                        painter = painterResource(R.drawable.karli),
+                        painter = painterResource(cat.image),
                         contentDescription = "cute cat",
                         modifier = Modifier
                             .height(80.dp)

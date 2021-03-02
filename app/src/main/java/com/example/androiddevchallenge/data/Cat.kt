@@ -15,8 +15,8 @@ data class Cat(
 )
 
 sealed class Fact(val value: String, val icon: ImageVector) {
-    class HomeTown(townName: String): Fact(townName, Icons.Filled.LocationCity)
-    class ArrivalDate(date: String): Fact(date, Icons.Filled.CalendarToday)
+    class HomeTown(townName: String) : Fact(townName, Icons.Filled.LocationCity)
+    class ArrivalDate(date: String) : Fact(date, Icons.Filled.CalendarToday)
 }
 
 sealed class Feature(val name: String, val color: Color, val icon: ImageVector) {

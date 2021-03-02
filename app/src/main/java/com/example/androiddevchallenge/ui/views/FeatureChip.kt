@@ -1,6 +1,5 @@
 package com.example.androiddevchallenge.ui.views
 
-import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
@@ -24,7 +23,14 @@ fun FeatureChip(feature: Feature) {
 
         ) {
             Row(verticalAlignment = Alignment.CenterVertically) {
-                Icon(feature.icon, contentDescription = null, modifier = Modifier.padding(4.dp).width(14.dp).height(14.dp))
+                Icon(
+                    feature.icon,
+                    contentDescription = null,
+                    modifier = Modifier
+                        .padding(4.dp)
+                        .width(14.dp)
+                        .height(14.dp)
+                )
                 Text(
                     text = feature.name,
                     fontSize = 12.sp,

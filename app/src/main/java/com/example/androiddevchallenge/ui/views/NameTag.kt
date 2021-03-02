@@ -9,7 +9,6 @@ import com.example.androiddevchallenge.Headline
 import com.example.androiddevchallenge.HeadlineHuge
 import com.example.androiddevchallenge.data.Cat
 
-
 @Composable
 fun NameTag(cat: Cat) {
     Row(verticalAlignment = Alignment.CenterVertically) {

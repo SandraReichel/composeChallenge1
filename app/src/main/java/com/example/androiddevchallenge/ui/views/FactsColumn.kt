@@ -10,13 +10,12 @@ import com.example.androiddevchallenge.data.Fact
 
 @Composable
 fun FactsColumn(facts: List<Fact>) {
-    Column() {
+    Column {
         facts.forEach { fact ->
             Row {
                 Icon(fact.icon, contentDescription = null, modifier = Modifier.padding(4.dp).width(14.dp).height(14.dp))
                 Text(fact.value)
             }
         }
-
     }
 }

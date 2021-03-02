@@ -4,17 +4,14 @@ import android.os.Bundle
 import androidx.activity.compose.setContent
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Face
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
@@ -24,7 +21,7 @@ import com.example.androiddevchallenge.data.DataProvider
 import com.example.androiddevchallenge.ui.theme.MyTheme
 import com.example.androiddevchallenge.ui.views.FactsColumn
 import com.example.androiddevchallenge.ui.views.FeatureChip
-import com.example.androiddevchallenge.ui.views.NameTag
+import com.example.androiddevchallenge.ui.views.NameHugeTag
 
 class CatDetailActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -49,10 +46,12 @@ class CatDetailActivity : AppCompatActivity() {
 fun CatDetail(cat: Cat) {
     Surface(color = MaterialTheme.colors.background) {
 
-        Box(modifier = Modifier
-            .padding(16.dp)
-            .fillMaxWidth()
-            .fillMaxHeight()) {
+        Box(
+            modifier = Modifier
+                .padding(16.dp)
+                .fillMaxWidth()
+                .fillMaxHeight()
+        ) {
             Card(
                 elevation = 8.dp, shape = RoundedCornerShape(10.dp),
                 modifier = Modifier
@@ -60,18 +59,20 @@ fun CatDetail(cat: Cat) {
                     .fillMaxWidth()
                     .fillMaxHeight()
             ) {
-                Column(modifier = Modifier
-                    .padding(16.dp, top = 250.dp)
-                    .fillMaxWidth()
-                    .fillMaxHeight()) {
-                    NameTag(cat = cat)
+                Column(
+                    modifier = Modifier
+                        .padding(16.dp, top = 250.dp)
+                        .fillMaxWidth()
+                        .fillMaxHeight()
+                ) {
+                    NameHugeTag(cat = cat)
                     Spacer(Modifier.padding(8.dp))
                     CatFacts(cat = cat)
                     Spacer(Modifier.padding(8.dp))
                     Text("This is the best cat ever. This eat loves cuddles and is super fun. ")
                     Spacer(Modifier.padding(8.dp))
-                    Button(onClick = {} ) {
-                        Row(){
+                    Button(onClick = {}) {
+                        Row() {
                             Icon(Icons.Filled.Favorite, contentDescription = null)
                             Text(" Adopt Now")
                         }

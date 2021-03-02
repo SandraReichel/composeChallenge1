@@ -42,7 +42,6 @@ import androidx.compose.ui.unit.sp
 import com.example.androiddevchallenge.CatDetailActivity.Companion.ARGUMENT_CAT_ID
 import com.example.androiddevchallenge.data.Cat
 import com.example.androiddevchallenge.data.DataProvider
-import com.example.androiddevchallenge.data.Fact
 import com.example.androiddevchallenge.data.Feature
 import com.example.androiddevchallenge.ui.theme.MyTheme
 import com.example.androiddevchallenge.ui.views.FeatureChip
@@ -60,7 +59,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun openCatProfile(catId: Int) {
         val intent = Intent(this, CatDetailActivity::class.java).apply {
-            putExtra(ARGUMENT_CAT_ID , catId)
+            putExtra(ARGUMENT_CAT_ID, catId)
         }
         startActivity(intent)
     }
@@ -69,20 +68,23 @@ class MainActivity : AppCompatActivity() {
 @Composable
 fun MyApp(onCatClicked: (Int) -> Unit) {
     Surface(color = MaterialTheme.colors.background) {
-        Column(horizontalAlignment = Alignment.End, modifier = Modifier.fillMaxWidth()
+        Column(
+            horizontalAlignment = Alignment.End, modifier = Modifier.fillMaxWidth()
         ) {
-            TopAppBar(title = {
-                Row{
-                    Text(text = "A Cat like Karli ")
-                    Icon(Icons.Filled.Pets, contentDescription = null)
-                } })
+            TopAppBar(
+                title = {
+                    Row {
+                        Text(text = "A Cat like Karli ")
+                        Icon(Icons.Filled.Pets, contentDescription = null)
+                    }
+                }
+            )
             CatList(DataProvider.getCatList()) {
                 onCatClicked.invoke(it)
             }
         }
     }
 }
-
 
 @Composable
 fun Header() {
@@ -135,14 +137,13 @@ fun CatItem(cat: Cat, onClick: () -> Unit) {
                             .clip(shape = RoundedCornerShape(10.dp)),
                         contentScale = ContentScale.Crop
                     )
-                    //FactsColumn(facts = cat.facts)
+                    // FactsColumn(facts = cat.facts)
                     FeatureItem(features = cat.features)
                 }
             }
         }
     }
 }
-
 
 @Composable
 fun FeatureItem(features: List<Feature>) {
@@ -153,7 +154,7 @@ fun FeatureItem(features: List<Feature>) {
     ) {
         val chunkedList = features.chunked(2)
         chunkedList.forEach {
-            Row() {
+            Row {
                 it.forEach { feature ->
                     FeatureChip(feature = feature)
                 }
@@ -161,13 +162,6 @@ fun FeatureItem(features: List<Feature>) {
         }
     }
 }
-
-
-
-
-
-
-
 
 @Composable
 fun Headline(text: String) {
@@ -183,7 +177,7 @@ fun HeadlineHuge(text: String) {
 @Composable
 fun LightPreview() {
     MyTheme {
-        MyApp({})
+        MyApp {}
     }
 }
 
@@ -191,6 +185,6 @@ fun LightPreview() {
 @Composable
 fun DarkPreview() {
     MyTheme(darkTheme = true) {
-        MyApp({})
+        MyApp {}
     }
 }

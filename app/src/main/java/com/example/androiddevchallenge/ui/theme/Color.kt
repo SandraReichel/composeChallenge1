@@ -29,4 +29,3 @@ val complementPink = Color(0xFF00AD09)
 
 val lightBlueBackground = Color(0xFFF8F8FF)
 val mediumLightBlueBackground = Color(0xFFE8ECFF)
-

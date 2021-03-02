@@ -25,7 +25,7 @@ object DataProvider {
         ),
         Cat(
             5, "Kuh", 11, Gender.Male,
-            arrayListOf(Fact.HomeTown("Heinrichsfeld"), Fact.ArrivalDate( "02.03.2018")),
+            arrayListOf(Fact.HomeTown("Heinrichsfeld"), Fact.ArrivalDate("02.03.2018")),
             arrayListOf()),
         Cat(
             6, "Purzel", 3, Gender.Female,
@@ -45,5 +45,4 @@ object DataProvider {
     )
 
     fun getCat(id: Int) = getCatList().first { it.id == id }
-
 }
